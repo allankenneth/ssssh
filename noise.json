@@ -1,0 +1,72 @@
+{
+    "Noise Disturbing Neighbourhood": [{
+        "Weekdays": [{
+                "Start":"08:00",
+                "End":"20:00"
+        }],
+        "Saturday": [{
+                "Start":"08:00",
+                "End":"20:00"
+        }],
+        "Holiday": [{
+                "Start":"08:00",
+                "End":"20:00"
+        }]
+    }],
+    "Power Equipment": [{
+        "Weekdays": [{
+                "Start":"08:00",
+                "End":"20:00"
+        }],
+        "Saturday": [{
+                "Start":"08:00",
+                "End":"20:00"
+        }],
+        "Holiday": [{
+                "Start":"08:00",
+                "End":"20:00"
+        }]
+    }],
+    "Leaf Blowers": [{
+        "Weekdays": [{
+                "Start":"08:00",
+                "End":"20:00"
+        }],
+        "Saturday": [{
+                "Start":"08:00",
+                "End":"20:00"
+        }],
+        "Holiday": [{
+                "Start":"08:00",
+                "End":"20:00"
+        }]
+    }],
+    "Chainsaws": [{
+        "Weekdays": [{
+                "Start":"08:00",
+                "End":"20:00"
+        }],
+        "Saturday": [{
+                "Start":"08:00",
+                "End":"20:00"
+        }],
+        "Holiday": [{
+                "Start":"08:00",
+                "End":"20:00"
+        }]
+    }],
+    "Construction": [{
+        "Weekdays": [{
+                "Start":"08:00",
+                "End":"20:00"
+        }],
+        "Saturday": [{
+                "Start":"08:00",
+                "End":"20:00"
+        }],
+        "Holiday": [{
+                "Start":"08:00",
+                "End":"20:00"
+        }]
+    }]
+}
