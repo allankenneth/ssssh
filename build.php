@@ -10,7 +10,8 @@ foreach($zones as $zone) {
                 foreach($z->types as $type) {
                         $output .= $type->type . '<br>';
                         $output .= $type->description . '<br>';
-                        foreach($type->days as $day) {
+                        foreach($type->ranges as $range) {
+                                $output .= $range->name . '<br>';
                                 //print_r($day->Weekdays);
                         }
 
