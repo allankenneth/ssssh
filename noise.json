@@ -1,5 +1,4 @@
-{
-"Zones": [{
+{"zones": [{
     "name": "Quiet Zone",
     "types": [{
         "type": "Noise Disturbing Neighbourhood",
@@ -12,6 +11,7 @@
                     "end":"20:00"
                 }]
             },
+            {
                 "name": "Saturday",
                 "times": [{
                     "start":"08:00",
@@ -25,7 +25,7 @@
                     "end":"20:00"
                 }]
             }
-        }]
+        ]
     }]
 }]
 }
