@@ -7,10 +7,10 @@ foreach($bylaws as $zones) {
         foreach($zones as $zone) {
                 $output .= '<h2>' . $zone->name . '</h2>'; 
                 foreach($zone->types as $type) {
-                        $output .= $type->type . '<br>';
+                        $output .= '<h3>' . $type->type . '</h3>';
                         $output .= $type->description . '<br>';
                         foreach($type->ranges as $range) {
-                                $output .= $range->name . '<br>';
+                                $output .= '<h4>' . $range->name . '</h4>';
                                 $output .= 'Starting: ' . $range->start . '<br>';
                                 $output .= 'Ending: ' . $range->end . '<br>';
                         }
