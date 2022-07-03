@@ -3,7 +3,7 @@
     "types": [
         {
             "type": "Power Equipment",
-            "description": "Despite any other provision of this Bylaw, but subject to sections 17 and 18, a person may, when using or operating power equipment between 8:00 a.m. and 8:00 p.m., make or cause a sound or noise that exceeds the sound level limits set out in sections 5 to 8 if the equivalent sound level does not exceed 75 dBA on an approved sound meter when received at the greater of the following distances from that power equipment: (a) at the point of reception; (b) 15.2 m (50 ft.).",
+            "description": "Any equipment or machinery used in lawn and garden care or in building and property maintenance, including but not limited to leaf blowers, edge trimmers, rototillers, lawn mowers, pressure washers, carpet cleaning equipment and hand-operated power tools;",
             "ranges": [
                 {
                     "name" : "Weekdays",
@@ -24,7 +24,7 @@
         },
         {
             "type": "Leaf Blowers",
-            "description": "Those infernal things.",
+            "description": "A portable machine, used for blowing or sucking up leaves, grass or debris including backpack, handheld or rolling units and those that accept vacuum attachments, but excluding vehicle-mounted units.",
             "ranges": [
                 {
                     "name" : "Weekdays",
