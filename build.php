@@ -18,4 +18,4 @@ foreach($zones as $zone) {
         }
 }
 file_put_contents($export, $output);
-echo $output
+echo $output;
