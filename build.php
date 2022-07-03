@@ -1,5 +1,5 @@
 <?php 
-$export = 'noise.html';
+$export = 'index.html';
 $bylaws = file_get_contents('https://raw.githubusercontent.com/allankenneth/ssssh/main/noise.json');
 $zones = json_decode($bylaws);
 $output = '<h1>' . date('Y-m-d') . '</h1>';
