@@ -8,4 +8,4 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      uses: kelvintaywl/action-jsonresume-export@v1
+      - uses: kelvintaywl/action-jsonresume-export@v1
