@@ -27,3 +27,21 @@ jobs:
         php-version: '7.4'
     # This triggers our php file we created before
     - run: php ./build.php
+    - name: Commit published HTML
+      id: commit
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        if [ -n "$(git status --porcelain noise.html)" ]; then
+          git add noise.html
+          git commit -m "[ci skip] chore(noise.html): update resume page"
+          echo ::set-output name=exit_code::0
+        else
+          echo ::set-output name=exit_code::1
+        fi
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      if: steps.commit.outputs.exit_code == 0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
