@@ -11,6 +11,8 @@ foreach($bylaws as $zones) {
                         $output .= $type->description . '<br>';
                         foreach($type->ranges as $range) {
                                 $output .= $range->name . '<br>';
+                                $output .= 'Starting: ' . $range->start . '<br>';
+                                $output .= 'Ending: ' . $range->end . '<br>';
                         }
                 }
         }
