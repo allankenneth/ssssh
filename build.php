@@ -30,20 +30,18 @@ foreach($bylaws as $zones) {
         foreach($zones as $zone) {
                 $output .= '<h1>' . $zone->name . '</h1>';
                 foreach($zone->types as $type) {
-                        $output .= '<div class="col-md-4">';
-                        
-             
+                        $output .= '<div class="col-md-6">';
+                        $output .= '<div class="p-6">';
                         foreach($type->ranges as $range) {
                                 $status = '';
                                 if($dayrange == $range->name) {     
                                         $times = '<div>' . $range->start . ' - ';
                                         $times .= '' . $range->end . '</div>';
                                         if($hour > $range->start && $hour < $range->end) {
-                                                $status = 'Yes, you may.';
+                                                $status = '<div class="alert alert-success">Yes, you may.</div>';
                                         } else {
-                                                $status = 'Please wait for another time.';
+                                                $status = '<div class="alert alert-success">Please wait for another time.</div>';
                                         }
-                                        $output .= '<div class="">' . $status . '</div>';
                                 }
                         }
                         $output .= '<h1>' . $type->type . '</h1>';
@@ -52,6 +50,7 @@ foreach($bylaws as $zones) {
                         if(!empty($type->description)) {
                                 $output .= '<div>' . $type->description . '</div>';
                         }
+                        $output .= '</div>';
                         $output .= '</div>';
                 }
         }
