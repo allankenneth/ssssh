@@ -13,7 +13,7 @@ if($day == 'Monday' || $day == 'Tuesday' || $day == 'Wednesday' || $day == 'Thur
         $dayrange = 'Holiday';
 }
 $hour = date('G:i');
-$output = 'It is ' . $day . ' at ' . $hour . '<br>';
+$output = 'It is a ' . $dayrange . '<br>';
 foreach($bylaws as $zones) {
         foreach($zones as $zone) {
                 $output .= '<h1>' . $zone->name . '</h1>';
@@ -22,8 +22,7 @@ foreach($bylaws as $zones) {
                         //$output .= $type->description . '<br>';
                         foreach($type->ranges as $range) {
                                 $status = '';
-                                if($dayrange == $range->name) {
-                                        $output .= '<h4>' . $dayrange . '</h4>';
+                                if($dayrange == $range->name) {     
                                         $output .= 'Starting: ' . $range->start . '';
                                         $output .= 'Ending: ' . $range->end . '<br>';
                                         if($hour > $range->start && $hour < $range->end) {
