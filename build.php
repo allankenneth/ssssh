@@ -37,11 +37,11 @@ $newyearsday = $year . '-01-01';
 $day = date('l');
 $dayrange = '';
 if($day == 'Monday' || $day == 'Tuesday' || $day == 'Wednesday' || $day == 'Thursday' || $day == 'Friday') {
-        $dayrange = 'Weekday';
+        $dayrange = 'Weekdays';
 } elseif ($day == 'Saturday') {
         $dayrange = 'Saturday';
 } elseif ($day == 'Sunday') {
-        $dayrange = 'Sunday';
+        $dayrange = 'Holiday';
 }
 $rawhour = date('GS');
 $hour = date('G:i');
@@ -55,18 +55,20 @@ $header = <<<EOD
 <body>
 <div class="container">
 <div class="row justify-content-md-center">
+<h1>May I Make Noise?</h1>
 EOD;
 $output = $header;
-$output .= '<h1>It is a ' . $dayrange . ' in the ' . $rawhour . ' </h1>';
+$output .= '<div>It is a ' . $dayrange . ' in the ' . $rawhour . ' hour</div>';
 foreach($bylaws as $zones) {
         foreach($zones as $zone) {
                 //$output .= '<h1>' . $zone->name . '</h1>';
                 foreach($zone->types as $type) {
+			$times = '';
+			$status = '';
                         $output .= '<div class="col-md-12">';
                         $output .= '<div class="p-6">';
                         foreach($type->ranges as $range) {
-                                $status = '';
-                                if($dayrange == $range->name) {     
+				if($dayrange == $range->name) {     
                                         $times = '<div>' . $range->start . ' - ';
                                         $times .= '' . $range->end . '</div>';
                                         if($hour > $range->start && $hour < $range->end) {
