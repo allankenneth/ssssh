@@ -1,8 +1,36 @@
 <?php 
+/**
+ * City of Victoria, BC Noise Bylaws 
+ * BYLAW NO. 03-012
+ * https://www.victoria.ca/assets/City~Hall/Bylaws/bylaw-03-012.pdf
+ * 
+ * These noise bylaws are difficult to read and are not 
+ * presented in an easy format if your question is simply
+ * "May I make noise right now?" in your neighbourhood.
+ * 
+ * Ssssh! takes the gist of the bylaws, takes the current 
+ * date and hour in mind, and tells you what kinds of noise
+ * that you are currently allowed to make in an easy to
+ * see way.
+ * 
+ **/
 date_default_timezone_set('America/Los_Angeles');
-$export = 'index.html';
 $data = file_get_contents('https://raw.githubusercontent.com/allankenneth/ssssh/main/noise.json');
 $bylaws = json_decode($data);
+/**
+ * Holidays
+ * 
+ * (a) New Year’s Day, Good Friday, Easter Monday, Victoria Day, Canada Day, 
+ * British Columbia Day, Labour Day, Thanksgiving Day, Remembrance Day, 
+ * Christmas Day and December 26, and
+ * (b) the day following a day that is named in paragraph (a) and that falls on a Sunday;
+ * 
+ **/
+
+$year = date('Y');
+$easter = date("Y-m-d", easter_date($year));
+//$easter date('Y-m-d', strtotime("last sunday of march $currentYear"));
+
 $day = date('l');
 $dayrange = '';
 if($day == 'Monday' || $day == 'Tuesday' || $day == 'Wednesday' || $day == 'Thursday' || $day == 'Friday') {
@@ -10,7 +38,7 @@ if($day == 'Monday' || $day == 'Tuesday' || $day == 'Wednesday' || $day == 'Thur
 } elseif ($day == 'Saturday') {
         $dayrange = 'Saturday';
 } elseif ($day == 'Sunday') {
-        $dayrange = 'Holiday';
+        $dayrange = 'Sunday';
 }
 $hour = date('G:i');
 $header = <<<EOD
@@ -61,5 +89,6 @@ $footer = <<<EOD
 </html>
 EOD;
 $output .= $footer;
+$export = 'index.html';
 file_put_contents($export, $output);
 echo $output;
