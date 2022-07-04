@@ -13,13 +13,21 @@ if($day == 'Monday' || $day == 'Tuesday' || $day == 'Wednesday' || $day == 'Thur
         $dayrange = 'Holiday';
 }
 $hour = date('G:i');
-$output = <<<EOD
+$output = <<<E
+<!doctype HTML>
+<html lang="en">
+<head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+<div class="row justify-content-md-center">
 EOD;
 $output .= '<div>It is a ' . $dayrange . '</div>';
 foreach($bylaws as $zones) {
         foreach($zones as $zone) {
+                $output .= '<div class="col">';
                 $output .= '<h1>' . $zone->name . '</h1>';
                 foreach($zone->types as $type) {
                         $output .= '<h1>' . $type->type . '</h1>';
@@ -38,7 +46,14 @@ foreach($bylaws as $zones) {
                                 }
                         }
                 }
+                $output .= '</div>';
         }
 }
 file_put_contents($export, $output);
+$output .= <<<EOD
+</div>
+</div>
+</body>
+</html>
+EOD;
 echo $output;
