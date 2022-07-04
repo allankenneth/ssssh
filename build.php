@@ -13,15 +13,15 @@ foreach($bylaws as $zones) {
                         $output .= $type->description . '<br>';
                         foreach($type->ranges as $range) {
                                 $status = '';
+                                $output .= '<h4>' . $range->name . '</h4>';
+                                $output .= 'Starting: ' . $range->start . '<br>';
+                                $output .= 'Ending: ' . $range->end . '<br>';
                                 if($hour > $range->start && $hour < $range->end) {
                                         $status = 'YESSA';
                                 } else {
                                         $status = 'HELL NO';
                                 }
-                                $output .= $status;
-                                $output .= '<h4>' . $range->name . '</h4>';
-                                $output .= 'Starting: ' . $range->start . '<br>';
-                                $output .= 'Ending: ' . $range->end . '<br>';
+                                $output .= '<div>' . $status . '</div>';
                         }
                 }
         }
