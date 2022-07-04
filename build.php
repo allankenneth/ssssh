@@ -30,6 +30,9 @@ $bylaws = json_decode($data);
 $year = date('Y');
 $easter = date("Y-m-d", easter_date($year));
 //$easter date('Y-m-d', strtotime("last sunday of march $currentYear"));
+$newyearsday = $year . '-01-01';
+//$victoriaday = $year . '-01-01'; // observed on the Monday before May 25th each year
+//$holidays = [''];
 
 $day = date('l');
 $dayrange = '';
@@ -72,7 +75,7 @@ foreach($bylaws as $zones) {
                                         }
                                 }
                         }
-                        $output .= '<h2>' . $type->type . ' <span class="fs-5">' . $times . '</span></h2>';
+                        $output .= '<h2>' . $type->type . ' <span class="inline fs-5">' . $times . '</span></h2>';
                         $output .= $status;
                         if(!empty($type->description)) {
                                 //$output .= '<div>' . $type->description . '</div>';
