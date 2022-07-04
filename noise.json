@@ -2,8 +2,8 @@
     "name": "Quiet Zone",
     "types": [
         {
-            "type": "Noise Disturbing Neighbourhood",
-            "description": "",
+            "type": "General Noise",
+            "description": "Noise Disturbing Neighbourhood",
             "ranges": [
                 {
                     "name" : "Weekdays",
