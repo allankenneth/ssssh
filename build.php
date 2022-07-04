@@ -30,7 +30,7 @@ foreach($bylaws as $zones) {
         foreach($zones as $zone) {
                 $output .= '<h1>' . $zone->name . '</h1>';
                 foreach($zone->types as $type) {
-                        $output .= '<div class="col-md-6">';
+                        $output .= '<div class="col-md-12">';
                         $output .= '<div class="p-6">';
                         foreach($type->ranges as $range) {
                                 $status = '';
