@@ -40,11 +40,11 @@ foreach($bylaws as $zones) {
                                         if($hour > $range->start && $hour < $range->end) {
                                                 $status = '<div class="alert alert-success">Yes, you may.</div>';
                                         } else {
-                                                $status = '<div class="alert alert-success">Please wait for another time.</div>';
+                                                $status = '<div class="alert alert-danger">Please wait for another time.</div>';
                                         }
                                 }
                         }
-                        $output .= '<h1>' . $type->type . '</h1>';
+                        $output .= '<h2>' . $type->type . '</h2>';
                         $output .= $times;
                         $output .= $status;
                         if(!empty($type->description)) {
