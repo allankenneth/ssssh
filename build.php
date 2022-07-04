@@ -30,23 +30,27 @@ foreach($bylaws as $zones) {
         foreach($zones as $zone) {
                 $output .= '<h1>' . $zone->name . '</h1>';
                 foreach($zone->types as $type) {
-                        $output .= '<div class="col">';
-                        $output .= '<h1>' . $type->type . '</h1>';
-                        if(!empty($type->description)) {
-                                $output .= '<div>' . $type->description . '</div>';
-                        }
+                        $output .= '<div class="col-md-4">';
+                        
+             
                         foreach($type->ranges as $range) {
                                 $status = '';
                                 if($dayrange == $range->name) {     
-                                        $output .= '<div>' . $range->start . ' - ';
-                                        $output .= '' . $range->end . '</div>';
+                                        $times = '<div>' . $range->start . ' - ';
+                                        $times .= '' . $range->end . '</div>';
                                         if($hour > $range->start && $hour < $range->end) {
                                                 $status = 'Yes, you may.';
                                         } else {
                                                 $status = 'Please wait for another time.';
                                         }
-                                        $output .= '<div>' . $status . '</div>';
+                                        $output .= '<div class="">' . $status . '</div>';
                                 }
+                        }
+                        $output .= '<h1>' . $type->type . '</h1>';
+                        $output .= $times;
+                        $output .= $status;
+                        if(!empty($type->description)) {
+                                $output .= '<div>' . $type->description . '</div>';
                         }
                         $output .= '</div>';
                 }
