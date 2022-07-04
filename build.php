@@ -56,6 +56,7 @@ $header = <<<EOD
 <div class="container">
 <div class="row justify-content-md-center">
 <h1>May I Make Noise?</h1>
+<h2>Victoria BC Quiet District Bylaws Made Plain</h2>
 EOD;
 $output = $header;
 $output .= '<div>It is a ' . $dayrange . ' in the ' . $rawhour . ' hour</div>';
