@@ -43,6 +43,7 @@ if($day == 'Monday' || $day == 'Tuesday' || $day == 'Wednesday' || $day == 'Thur
 } elseif ($day == 'Sunday') {
         $dayrange = 'Sunday';
 }
+$rawhour = date('GS');
 $hour = date('G:i');
 $header = <<<EOD
 <!doctype HTML>
@@ -56,10 +57,10 @@ $header = <<<EOD
 <div class="row justify-content-md-center">
 EOD;
 $output = $header;
-$output .= '<div>It is a ' . $dayrange . '</div>';
+$output .= '<h1>It is a ' . $dayrange . ' in the ' . $rawhour . ' </h1>';
 foreach($bylaws as $zones) {
         foreach($zones as $zone) {
-                $output .= '<h1>' . $zone->name . '</h1>';
+                //$output .= '<h1>' . $zone->name . '</h1>';
                 foreach($zone->types as $type) {
                         $output .= '<div class="col-md-12">';
                         $output .= '<div class="p-6">';
