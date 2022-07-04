@@ -13,7 +13,7 @@ if($day == 'Monday' || $day == 'Tuesday' || $day == 'Wednesday' || $day == 'Thur
         $dayrange = 'Holiday';
 }
 $hour = date('G:i');
-$output = <<<E
+$header = <<<EOD
 <!doctype HTML>
 <html lang="en">
 <head>
@@ -24,6 +24,7 @@ $output = <<<E
 <div class="container">
 <div class="row justify-content-md-center">
 EOD;
+$output = $header;
 $output .= '<div>It is a ' . $dayrange . '</div>';
 foreach($bylaws as $zones) {
         foreach($zones as $zone) {
@@ -49,11 +50,12 @@ foreach($bylaws as $zones) {
                 $output .= '</div>';
         }
 }
-file_put_contents($export, $output);
-$output .= <<<EOD
+$footer = <<<EOD
 </div>
 </div>
 </body>
 </html>
 EOD;
+$output .= $footer;
+file_put_contents($export, $output);
 echo $output;
