@@ -59,7 +59,7 @@ $header = <<<EOD
 <h2>Victoria BC Quiet District Bylaws Made Plain</h2>
 EOD;
 $output = $header;
-$output .= '<div>It is a ' . $dayrange . ' in the ' . $rawhour . ' hour</div>';
+$output .= '<div>It is a ' . strtolower(rtrim($dayrange,'s')) . ' in the ' . $rawhour . ' hour</div>';
 foreach($bylaws as $zones) {
         foreach($zones as $zone) {
                 //$output .= '<h1>' . $zone->name . '</h1>';
