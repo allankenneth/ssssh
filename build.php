@@ -66,7 +66,7 @@ foreach($bylaws as $zones) {
                 foreach($zone->types as $type) {
 			$times = '';
 			$status = '';
-                        $output .= '<div class="col-md-12">';
+                        $output .= '<div class="col-md-6">';
                         $output .= '<div class="p-6">';
                         foreach($type->ranges as $range) {
 				if($dayrange == $range->name) {     
