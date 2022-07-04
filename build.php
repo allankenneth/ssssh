@@ -32,7 +32,9 @@ foreach($bylaws as $zones) {
                 $output .= '<h1>' . $zone->name . '</h1>';
                 foreach($zone->types as $type) {
                         $output .= '<h1>' . $type->type . '</h1>';
-                        $output .= $type->description . '<br>';
+                        if(!empty($type->description) {
+                                $output .= '<div>' . $type->description . '</div>';
+                        }
                         foreach($type->ranges as $range) {
                                 $status = '';
                                 if($dayrange == $range->name) {     
