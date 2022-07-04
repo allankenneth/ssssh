@@ -3,6 +3,9 @@ $export = 'index.html';
 $data = file_get_contents('https://raw.githubusercontent.com/allankenneth/ssssh/main/noise.json');
 $bylaws = json_decode($data);
 //$output = '<h1>' . date('Y-m-d') . '</h1>';
+$day = date('l');
+$hour = date('G');
+echo 'It is ' . $day . ' at ' . $hour . '<br>';
 $output = '';
 foreach($bylaws as $zones) {
         foreach($zones as $zone) {
