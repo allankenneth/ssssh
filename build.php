@@ -14,6 +14,11 @@ foreach($bylaws as $zones) {
                         $output .= '<h1>' . $type->type . '</h1>';
                         $output .= $type->description . '<br>';
                         foreach($type->ranges as $range) {
+                                if($hour > $range->start && $hour < $range->end) {
+                                        $output .= 'YESSA';
+                                } else {
+                                        $output .= 'HELL NO';
+                                }
                                 $output .= '<h4>' . $range->name . '</h4>';
                                 $output .= 'Starting: ' . $range->start . '<br>';
                                 $output .= 'Ending: ' . $range->end . '<br>';
