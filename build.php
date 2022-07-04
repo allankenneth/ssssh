@@ -1,4 +1,5 @@
 <?php 
+date_default_timezone_set('America/Los_Angeles');
 $export = 'index.html';
 $data = file_get_contents('https://raw.githubusercontent.com/allankenneth/ssssh/main/noise.json');
 $bylaws = json_decode($data);
