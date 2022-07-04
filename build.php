@@ -44,8 +44,7 @@ foreach($bylaws as $zones) {
                                         }
                                 }
                         }
-                        $output .= '<h2>' . $type->type . ' ';
-                        $output .= '<span class="text-sm">' . $times . '</span></h2>';
+                        $output .= '<h2>' . $type->type . ' <span class="fs-5">' . $times . '</span></h2>';
                         $output .= $status;
                         if(!empty($type->description)) {
                                 //$output .= '<div>' . $type->description . '</div>';
