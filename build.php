@@ -28,9 +28,9 @@ $output = $header;
 $output .= '<div>It is a ' . $dayrange . '</div>';
 foreach($bylaws as $zones) {
         foreach($zones as $zone) {
-                $output .= '<div class="col">';
                 $output .= '<h1>' . $zone->name . '</h1>';
                 foreach($zone->types as $type) {
+                        $output .= '<div class="col">';
                         $output .= '<h1>' . $type->type . '</h1>';
                         if(!empty($type->description)) {
                                 $output .= '<div>' . $type->description . '</div>';
@@ -48,8 +48,8 @@ foreach($bylaws as $zones) {
                                         $output .= '<div>' . $status . '</div>';
                                 }
                         }
+                        $output .= '</div>';
                 }
-                $output .= '</div>';
         }
 }
 $footer = <<<EOD
