@@ -13,22 +13,26 @@ if($day == 'Monday' || $day == 'Tuesday' || $day == 'Wednesday' || $day == 'Thur
         $dayrange = 'Holiday';
 }
 $hour = date('G:i');
-$output = 'It is a ' . $dayrange . '<br>';
+$output = <<<EOD
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+EOD;
+$output .= '<div>It is a ' . $dayrange . '</div>';
 foreach($bylaws as $zones) {
         foreach($zones as $zone) {
                 $output .= '<h1>' . $zone->name . '</h1>';
                 foreach($zone->types as $type) {
                         $output .= '<h1>' . $type->type . '</h1>';
-                        //$output .= $type->description . '<br>';
+                        $output .= $type->description . '<br>';
                         foreach($type->ranges as $range) {
                                 $status = '';
                                 if($dayrange == $range->name) {     
-                                        $output .= 'Starting: ' . $range->start . '';
-                                        $output .= 'Ending: ' . $range->end . '<br>';
+                                        $output .= '<div>' . $range->start . ' - ';
+                                        $output .= '' . $range->end . '</div>';
                                         if($hour > $range->start && $hour < $range->end) {
-                                                $status = 'YESSA';
+                                                $status = 'Yes, you may.';
                                         } else {
-                                                $status = 'HELL NO';
+                                                $status = 'Please wait for another time.';
                                         }
                                         $output .= '<div>' . $status . '</div>';
                                 }
