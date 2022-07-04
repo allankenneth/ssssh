@@ -2,11 +2,9 @@
 $export = 'index.html';
 $data = file_get_contents('https://raw.githubusercontent.com/allankenneth/ssssh/main/noise.json');
 $bylaws = json_decode($data);
-//$output = '<h1>' . date('Y-m-d') . '</h1>';
 $day = date('l');
-$hour = date('G');
-echo 'It is ' . $day . ' at ' . $hour . '<br>';
-$output = '';
+$hour = date('G:i');
+$output = 'It is ' . $day . ' ' . $hour . ' hundred hours<br>';
 foreach($bylaws as $zones) {
         foreach($zones as $zone) {
                 $output .= '<h1>' . $zone->name . '</h1>'; 
@@ -14,11 +12,13 @@ foreach($bylaws as $zones) {
                         $output .= '<h1>' . $type->type . '</h1>';
                         $output .= $type->description . '<br>';
                         foreach($type->ranges as $range) {
+                                $status = '';
                                 if($hour > $range->start && $hour < $range->end) {
-                                        $output .= 'YESSA';
+                                        $status = 'YESSA';
                                 } else {
-                                        $output .= 'HELL NO';
+                                        $status = 'HELL NO';
                                 }
+                                $output .= $status;
                                 $output .= '<h4>' . $range->name . '</h4>';
                                 $output .= 'Starting: ' . $range->start . '<br>';
                                 $output .= 'Ending: ' . $range->end . '<br>';
