@@ -23,9 +23,9 @@ foreach($bylaws as $zones) {
                         foreach($type->ranges as $range) {
                                 $status = '';
                                 if($dayrange == $range->name) {
-                                        //$output .= '<h4>' . $range->name . '</h4>';
-                                        //$output .= 'Starting: ' . $range->start . '<br>';
-                                        //$output .= 'Ending: ' . $range->end . '<br>';
+                                        $output .= '<h4>' . $dayrange . '</h4>';
+                                        $output .= 'Starting: ' . $range->start . '';
+                                        $output .= 'Ending: ' . $range->end . '<br>';
                                         if($hour > $range->start && $hour < $range->end) {
                                                 $status = 'YESSA';
                                         } else {
