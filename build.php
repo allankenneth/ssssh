@@ -90,7 +90,7 @@ $header = <<<EOD
 </script>
 </head>
 <body>
-<h1 class="fs-4 bg-black text-white w-100 px-5 py-2">May I Make Noise?</h1>
+<h1 class="fs-4 bg-black text-white w-100 px-5 py-3 mb-3 text-center">May I Make Noise?</h1>
 <div class="container">
 <div class="row justify-content-md-center">
 <h2 class="text-center">Victoria BC Quiet District Bylaws Made Plain</h2>
