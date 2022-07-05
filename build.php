@@ -65,7 +65,7 @@ if($day == 'Monday' || $day == 'Tuesday' || $day == 'Wednesday' || $day == 'Thur
         $dayrange = 'Sunday';
 }
 $rawhour = date('GS');
-$hour = date('G:i');
+$hour = date('H:i');
 $header = <<<EOD
 <!doctype HTML>
 <html lang="en">
@@ -128,6 +128,24 @@ foreach($bylaws as $zones) {
         }
 }
 $footer = <<<EOD
+<div class="col-md-12">
+        <h1>About</h1>
+        <p>This site is not affiliated with the City of Victoria, British Columbia in any way and is
+        not guaranteed to be accurate. The logic is based on a reading of the bylaws and a customized
+        JSON representation derived from them. You can 
+        <a href="https://github.com/allankenneth/ssssh">view the code on GitHub</a>
+        .</p>
+        <p>Ssssh! was created in the spirit that more people would follow the bylaws and be respectful
+        of their neighbors if they had an easy way to check the bylaws that didn't involve reading a 
+        20 page PDF and attempting to parse out the bits relevant to them in the context of the 
+        current date and time that they are checking.</p>
+        <p>Please be resepctful of your neighbourhood. Noise pollution is still very much a form
+        of pollution, and just because you may not be sensitive to it, <strong>know</strong> that many of your neighbors
+        very much are. The bylaws are not optional and not based on personal convenience; for many 
+        knowing that they can depend on quiet during the defined hours is the <em>only</em> way to get
+        through the hours when others can make noise with unpredictable fervor.</p>
+        <a class="btn btn-primary" href="https://www.victoria.ca/assets/City~Hall/Bylaws/bylaw-03-012.pdf">Download Bylaw PDF</a>
+</div>
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
