@@ -70,6 +70,7 @@ $header = <<<EOD
 <!doctype HTML>
 <html lang="en">
 <head>
+<title>Victoria BC Quiet District Bylaws Made Plain</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -89,13 +90,13 @@ $header = <<<EOD
 </script>
 </head>
 <body>
+<h1 class="fs-4 bg-black text-white w-100 px-5 py-2">May I Make Noise?</h1>
 <div class="container">
 <div class="row justify-content-md-center">
-<h1 class="fs-3 bg-black text-white w-100 p-5">May I Make Noise?</h1>
 <h2 class="text-center">Victoria BC Quiet District Bylaws Made Plain</h2>
 EOD;
 $output = $header;
-$output .= '<div class="mb-5">It is a ' . strtolower(rtrim($dayrange,'s')) . ' in the ' . $rawhour . ' hour</div>';
+$output .= '<div class="mb-3 text-center">It is a ' . strtolower(rtrim($dayrange,'s')) . ' in the ' . $rawhour . ' hour</div>';
 $count = 0;
 foreach($bylaws as $zones) {
         foreach($zones as $zone) {
