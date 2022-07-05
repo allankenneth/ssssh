@@ -110,7 +110,7 @@ foreach($bylaws as $zones) {
                 }
         }
 }
-$output .= '<div>Last updated: ' . date('M dd \at G:i') . '</div>';
+$output .= '<div class="mt-5 fs-6">Last updated: ' . date('M d') . ' at ' . $hour . '.</div>';
 $footer = <<<EOD
 </div>
 </div>
