@@ -96,10 +96,12 @@ $header = <<<EOD
 EOD;
 $output = $header;
 $output .= '<div>It is a ' . strtolower(rtrim($dayrange,'s')) . ' in the ' . $rawhour . ' hour</div>';
+$count = 0;
 foreach($bylaws as $zones) {
         foreach($zones as $zone) {
                 //$output .= '<h1>' . $zone->name . '</h1>';
                 foreach($zone->types as $type) {
+                        $count++;
 			$times = '';
 			$status = '';
                         $output .= '<div class="col-md-6">';
@@ -115,10 +117,13 @@ foreach($bylaws as $zones) {
                                         }
                                 }
                         }
-                        $output .= '<h2>' . $type->type . ' <span class="inline fs-5">' . $times . '</span></h2>';
+                        $output .= '<h2>' . $type->type . ' ';
+                        $output .= '<span class="inline fs-5">' . $times . ' ';
+                        $output .= '<a class="btn btn-sm btn-secondary" data-bs-toggle="collapse" href="#info-'.$count.'" role="button" aria-expanded="false" aria-controls="info-'.$count.'">Info</a></span>';
+                        $output .= '</h2>';
                         $output .= $status;
                         if(!empty($type->description)) {
-                                //$output .= '<div>' . $type->description . '</div>';
+                                $output .= '<div id="info-'.$count.'" class="collapse">' . $type->description . '</div>';
                         }
                         $output .= '</div>';
                         $output .= '</div>';
