@@ -15,7 +15,7 @@
  * 
  **/
 date_default_timezone_set('America/Los_Angeles');
-$data = file_get_contents('https://raw.githubusercontent.com/allankenneth/ssssh/main/noise.json');
+$data = file_get_contents('https://raw.githubusercontent.com/allankenneth/ssssh/main/bylaws.json');
 $bylaws = json_decode($data);
 /**
  * Holidays
@@ -26,13 +26,34 @@ $bylaws = json_decode($data);
  * (b) the day following a day that is named in paragraph (a) and that falls on a Sunday;
  * 
  **/
-
 $year = date('Y');
-$easter = date("Y-m-d", easter_date($year));
-//$easter date('Y-m-d', strtotime("last sunday of march $currentYear"));
 $newyearsday = $year . '-01-01';
+$easter = date("Y-m-d", easter_date($year));
+$gf = new DateTime($easter);
+$goodf = $gf->sub(new DateInterval('P2D'));
+$goodfriday = $goodf->format('Y-m-d');
+$victoriaday = date('Y-m-d', strtotime("last monday before may 25 $year"));
+$canadaday = $year . '-07-01';
+$bcday = date('Y-m-d', strtotime("first monday of august $year"));
+$labourday = date('Y-m-d', strtotime("first monday of september $year"));
+$thanksgiving = date('Y-m-d', strtotime("second monday of october $year"));
+$rememberanceday = $year . '-11-11';
+$xmasday = $year . '-12-25';
+$boxingday = $year . '-12-26';
 //$victoriaday = $year . '-01-01'; // observed on the Monday before May 25th each year
-//$holidays = [''];
+$holidays = [
+                $newyearsday,
+                $goodfriday,
+                $easter,
+                $victoriaday,
+                $canadaday,
+                $bcday,
+                $labourday,
+                $thanksgiving,
+                $rememberanceday,
+                $xmasday,
+                $boxingday
+        ];
 
 $day = date('l');
 $dayrange = '';
@@ -41,7 +62,7 @@ if($day == 'Monday' || $day == 'Tuesday' || $day == 'Wednesday' || $day == 'Thur
 } elseif ($day == 'Saturday') {
         $dayrange = 'Saturday';
 } elseif ($day == 'Sunday') {
-        $dayrange = 'Holiday';
+        $dayrange = 'Sunday';
 }
 $rawhour = date('GS');
 $hour = date('G:i');
