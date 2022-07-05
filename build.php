@@ -104,7 +104,6 @@ foreach($bylaws as $zones) {
 			$times = '';
 			$status = '';
                         $output .= '<div class="col-md-6">';
-                        $output .= '<div class="p-3">';
                         foreach($type->ranges as $range) {
 				if($dayrange == $range->name) {     
                                         $times = '<div>' . $range->start . ' - ';
@@ -124,7 +123,6 @@ foreach($bylaws as $zones) {
                         if(!empty($type->description)) {
                                 $output .= '<div id="info-'.$count.'" class="collapse">' . $type->description . '</div>';
                         }
-                        $output .= '</div>';
                         $output .= '</div>';
                 }
         }
