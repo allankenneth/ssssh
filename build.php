@@ -96,7 +96,7 @@ $header = <<<EOD
 <h2 class="text-center">Victoria BC Quiet District Bylaws Made Plain</h2>
 EOD;
 $output = $header;
-$output .= '<div class="mb-3 text-center">It is a ' . strtolower(rtrim($dayrange,'s')) . ' in the ' . $rawhour . ' hour</div>';
+$output .= '<div class="mb-3 text-center">Last updated: ' . date('M d') . ' at ' . $hour . '.</div>';
 $count = 0;
 foreach($bylaws as $zones) {
         foreach($zones as $zone) {
@@ -131,7 +131,6 @@ foreach($bylaws as $zones) {
                 }
         }
 }
-$output .= '<div class="mt-5 fs-6">Last updated: ' . date('M d') . ' at ' . $hour . '.</div>';
 $footer = <<<EOD
 </div>
 </div>
