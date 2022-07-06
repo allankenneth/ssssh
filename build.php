@@ -27,6 +27,8 @@ $bylaws = json_decode($data);
  * 
  **/
 $year = date('Y');
+$today = date('Y-m-d');
+$sssshday = '2022-07-05';
 $newyearsday = $year . '-01-01';
 $easter = date("Y-m-d", easter_date($year));
 $gf = new DateTime($easter);
@@ -42,6 +44,7 @@ $xmasday = $year . '-12-25';
 $boxingday = $year . '-12-26';
 //$victoriaday = $year . '-01-01'; // observed on the Monday before May 25th each year
 $holidays = [
+                $sssshday,
                 $newyearsday,
                 $goodfriday,
                 $easter,
@@ -63,6 +66,8 @@ if($day == 'Monday' || $day == 'Tuesday' || $day == 'Wednesday' || $day == 'Thur
         $dayrange = 'Saturday';
 } elseif ($day == 'Sunday') {
         $dayrange = 'Sunday';
+} elseif (in_array($today,$holidays)) {
+        $dayrange = 'Holiday';
 }
 $rawhour = date('GS');
 $hour = date('H:i');
@@ -94,6 +99,7 @@ $header = <<<EOD
 <h2 class="text-center">Victoria BC Quiet District Bylaws Made Plain</h2>
 EOD;
 $output = $header;
+$output .= '<div class="text-center">It\'s a ' . strtolower(rtrim('s',$dayrange)) . '</div>';
 $output .= '<div class="mb-3 text-center">Last updated: ' . date('M d') . ' at ' . $hour . '.</div>';
 $count = 0;
 foreach($bylaws as $zones) {
