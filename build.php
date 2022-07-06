@@ -128,7 +128,7 @@ foreach($bylaws as $zones) {
         }
 }
 $footer = <<<EOD
-<div class="col-md-12">
+<div class="col-md-8">
         <h1>About</h1>
         <p>This site is not affiliated with the City of Victoria, British Columbia in any way and is
         not guaranteed to be accurate. The logic is based on a reading of the bylaws and a customized
