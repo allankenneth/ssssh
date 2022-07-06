@@ -145,11 +145,7 @@ $footer = <<<EOD
         of their neighbors if they had an easy way to check the bylaws that didn't involve reading a 
         20 page PDF and attempting to parse out the bits relevant to them in the context of the 
         current date and time that they are checking.</p>
-        <p>Please be resepctful of your neighbourhood. Noise pollution is still very much a form
-        of pollution, and just because you may not be sensitive to it, <strong>know</strong> that many of your neighbors
-        very much are. The bylaws are not optional and not based on personal convenience; for many 
-        knowing that they can depend on quiet during the defined hours is the <em>only</em> way to get
-        through the hours when others can make noise with unpredictable fervor.</p>
+        
         <a class="btn btn-primary" href="https://www.victoria.ca/assets/City~Hall/Bylaws/bylaw-03-012.pdf">Download Bylaw PDF</a>
 </div>
 </div>
