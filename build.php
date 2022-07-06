@@ -122,9 +122,9 @@ foreach($bylaws as $zones) {
                                 }
                         }
                         $output .= '<h2>' . $type->type . ' ';
-                        $output .= '<span class="inline fs-5">' . $times . ' ';
-                        $output .= '<a class="btn btn-sm btn-secondary" data-bs-toggle="collapse" href="#info-'.$count.'" role="button" aria-expanded="false" aria-controls="info-'.$count.'">Info</a></span>';
-                        $output .= '</h2>';
+                        $output .= '<span class="inline fs-5">' . $times . '';
+                        //$output .= '<a class="btn btn-sm btn-secondary" data-bs-toggle="collapse" href="#info-'.$count.'" role="button" aria-expanded="false" aria-controls="info-'.$count.'">Info</a></span>';
+                        $output .= '</span></h2>';
                         $output .= $status;
                         if(!empty($type->description)) {
                                 $output .= '<div id="info-'.$count.'" class="collapse">' . $type->description . '</div>';
