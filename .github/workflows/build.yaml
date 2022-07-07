@@ -8,8 +8,8 @@ name: Build Site
 # Controls when the action will run. 
 on:
   # Triggers the workflow on push of repository
-  push:
-    branches: [ main ]
+  #push:
+  #  branches: [ main ]
   # Can add a schedule cron of when to run action but leaving this commented out for now
   #schedule:
   #  - cron: '59 * * * *' 
