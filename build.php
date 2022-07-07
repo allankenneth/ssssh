@@ -28,7 +28,7 @@ $bylaws = json_decode($data);
  **/
 $year = date('Y');
 $today = date('Y-m-d');
-$sssshday = '2022-07-05';
+$sssshday = '2022-07-06';
 $newyearsday = $year . '-01-01';
 $easter = date("Y-m-d", easter_date($year));
 $gf = new DateTime($easter);
@@ -66,7 +66,7 @@ if($day == 'Monday' || $day == 'Tuesday' || $day == 'Wednesday' || $day == 'Thur
         $dayrange = 'Saturday';
 } elseif ($day == 'Sunday') {
         $dayrange = 'Sunday';
-} elseif (in_array($today,$holidays)) {
+} elseif (in_array($holidays,$today)) {
         $dayrange = 'Holiday';
 }
 $rawhour = date('GS');
