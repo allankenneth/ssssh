@@ -11,8 +11,8 @@ on:
   push:
     branches: [ main ]
   # Can add a schedule cron of when to run action but leaving this commented out for now
-  schedule:
-    - cron: '59 * * * *' 
+  #schedule:
+  #  - cron: '59 * * * *' 
   # on 56th minute of each hour to account for the ~5 delay in running jobs
   # */59 6-23 * * * every 59 minutes from 6am through 11pm
   # Allows you to run this workflow manually from the Actions tab
