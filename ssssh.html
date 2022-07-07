@@ -1,121 +1,54 @@
+<!doctype HTML>
+<html lang="en">
+<head>
+<title>Victoria BC Quiet District Bylaws Made Plain</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <script>
-const data = {
-  "zones": [{
-    "name": "Quiet Zone",
-    "types": [
-        {
-            "type": "General Noise",
-            "description": "Noise Disturbing Neighbourhood",
-            "ranges": [
-                {
-                    "name" : "Weekdays",
-                    "start":"07:00",
-                    "end":"22:00"
-                },
-                {
-                    "name": "Saturday",
-                    "start":"07:00",
-                    "end":"22:00"
-                },
-                {
-                    "name": "Holiday",
-                    "start":"07:00",
-                    "end":"22:00"
-                }
-            ]
-        },
-        {
-            "type": "Power Equipment",
-            "description": "Any equipment or machinery used in lawn and garden care or in building and property maintenance, including but not limited to leaf blowers, edge trimmers, rototillers, lawn mowers, pressure washers, carpet cleaning equipment and hand-operated power tools;",
-            "ranges": [
-                {
-                    "name" : "Weekdays",
-                    "start":"08:00",
-                    "end":"20:00"
-                },
-                {
-                    "name": "Saturday",
-                    "start":"08:00",
-                    "end":"20:00"
-                },
-                {
-                    "name": "Holiday",
-                    "start":"08:00",
-                    "end":"20:00"
-                }
-            ]
-        },
-        {
-            "type": "Leaf Blowers",
-            "description": "A portable machine, used for blowing or sucking up leaves, grass or debris including backpack, handheld or rolling units and those that accept vacuum attachments, but excluding vehicle-mounted units.",
-            "ranges": [
-                {
-                    "name" : "Weekdays",
-                    "start":"09:00",
-                    "end":"20:00"
-                },
-                {
-                    "name": "Saturday",
-                    "start":"09:00",
-                    "end":"17:00"
-                },
-                {
-                    "name": "Holiday",
-                    "start":"09:00",
-                    "end":"17:00"
-                }
-            ]
-        },
-        {
-            "type": "Construction",
-            "description": "includes (a) the erection, alteration, repair, relocation, dismantling, demolition and removal of a building; (b) structural maintenance, power-washing, painting, land clearing, earth moving, grading, excavating, the laying of pipe and conduit (whether above or below ground), street or road building and repair, concrete placement, and the installation, or removal of construction equipment, components and materials in any form or for any purpose; (c) any work being done in connection with any of the work listed in paragraphs (a) or (b);",
-            "ranges": [
-                {
-                    "name" : "Weekdays",
-                    "start":"07:00",
-                    "end":"19:00"
-                },
-                {
-                    "name": "Saturday",
-                    "start":"10:00",
-                    "end":"19:00"
-                },
-                {
-                    "name": "Holiday",
-                    "start":"00:00",
-                    "end":"00:00"
-                }
-            ]
-        },
-        {
-            "type": "Chainsaws",
-            "description": "",
-            "ranges": [
-                {
-                    "name" : "Weekdays",
-                    "start":"08:00",
-                    "end":"20:00"
-                },
-                {
-                    "name": "Saturday",
-                    "start":"09:00",
-                    "end":"17:00"
-                },
-                {
-                    "name": "Holiday",
-                    "start":"09:00",
-                    "end":"17:00"
-                }
-            ]
-        }
-    ]
-}]
-};
-
-const bylaws = JSON.parse(data);
-
-bylaws.forEach(bylaws.zones => zone) {
-    console.log(zone.name);
-}
-
+    var current = new Date();
+    var future = new Date();
+    future.setTime(future.getTime() + 3600000); //3600000 = 1 hour
+    future.setMinutes(0);
+    future.setSeconds(0);
+    var timeout = (future.getTime() - current.getTime());
+    setTimeout(function() { window.location.reload(true); }, timeout);
 </script>
+</head>
+<body>
+<h1 class="fs-4 bg-black text-white w-100 px-5 py-3 mb-3 text-center">
+  May I Make Noise?
+</h1>
+<div class="container">
+<div class="row justify-content-md-center">
+<h2 class="text-center">Victoria BC Quiet District Bylaws Made Plain</h2>
+<div class="col-12" id="app"></div>
+</div>
+</div>
+<script>
+  (async () => {
+    const res = await fetch('https://raw.githubusercontent.com/allankenneth/ssssh/main/bylaws.json', {
+      headers: { Accept: 'application/json' },
+    });
+    const json = await res.json();
+    var output = '';
+    Object.entries(json).forEach(([key, zone]) => {
+      zone[0].types.forEach((type) => {
+        output += type.type + "<br>";
+        type.ranges.forEach((range) => {
+          output += "--" + range.name + "<br>";
+          output += "----" + range.start + "<br>";
+          output += "------" + range.end + "<br>";
+        });
+      });
+    });
+    let app = document.querySelector('#app');
+    app.append(output);
+    console.log(output);
+  })();
+</script>
+</body>
+</html>
