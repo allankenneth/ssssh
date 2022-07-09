@@ -146,7 +146,7 @@ $footer = <<<EOD
         20 page PDF and attempting to parse out the bits relevant to them in the context of the 
         current date and time that they are checking.</p>
         
-        <a class="btn btn-primary" href="https://www.victoria.ca/assets/City~Hall/Bylaws/bylaw-03-012.pdf">Download Bylaw PDF</a>
+        <a class="btn btn-primary mb-6" href="https://www.victoria.ca/assets/City~Hall/Bylaws/bylaw-03-012.pdf">Download Bylaw PDF</a>
 </div>
 </div>
 </div>
@@ -155,6 +155,6 @@ $footer = <<<EOD
 </html>
 EOD;
 $output .= $footer;
-$export = 'index.html';
+$export = 'built-from-php.html';
 file_put_contents($export, $output);
 echo $output;
