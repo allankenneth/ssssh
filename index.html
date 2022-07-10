@@ -19,22 +19,29 @@
     setTimeout(function() { window.location.reload(true); }, timeout);
 </script>
 </head>
-<body>
-<div class="container">
-<div class="row justify-content-md-center">
-<h1 class="mt-4 text-center fw-lighter">
-    <span class="display-4">Victoria, BC Quiet District Bylaws,</span><br>
-    <span class="display-3 text-uppercase fw-lighter">Made Plain</span>
+<body class="bg-light">
+<h1 class="text-center">
+    <span class="fs-3">Victoria, BC</span><br>
+    <span class="display-4 fw-bold">Quiet District Bylaws</span><br>
+    <span class="display-5 text-uppercase fw-lighter">Made Plain</span>
 </h1>
+<div class="bg-white">
+<div class="container bg-white">
+<div class="row pt-3">
+  
+
 <div class="col-12" id="app"></div>
-</div>
-</div>
+
+
 <div style="height: 200px"></div>
+</div>
+</div>
+</div>
 <div class="bg-black text-white">
 <div class="container">
 <div class="row">
 <div class="col-md-8">
-<div class="py-5">  
+<div class="py-5">
         <h1>About</h1>
         <p>This site is not affiliated with the City of Victoria, British Columbia in any way and is
         not guaranteed to be accurate. The logic is based on a reading of the bylaws and a customized
@@ -43,11 +50,18 @@
         .</p>
         <p>Ssssh! was created in the spirit that more people would follow the bylaws and be respectful
         of their neighbors if they had an easy way to check the bylaws that didn't involve reading a 
-        20 page PDF and attempting to parse out the bits relevant to them in the context of the 
-        current date and time that they are checking.</p>
+        20 page PDF to find the relevant section relative to the current date and time.</p>
         
         <a class="btn btn-primary mb-6" href="https://www.victoria.ca/assets/City~Hall/Bylaws/bylaw-03-012.pdf">Download Bylaw PDF</a>
         <div style="height: 200px"></div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="py-5">
+  <h2>Acknowledgement</h2>
+  <p class="fs-4">This website pertains to bylaws in the city of Victoria, BC which exists 
+  on the unceded territories of the Lekwungen peoples, today known as the Songhees 
+  and Esquimalt nations.</p>
 </div>
 </div>
 </div>
@@ -126,8 +140,8 @@ console.log(dayrange);
   output += '<div class="row">';
   Object.entries(json).forEach(([key, zone]) => {
     zone[0].types.forEach((type) => {
-      output += '<div class="col-md-4">';
-      let header = '<h3>' + type.type + "</h3>";
+      output += '<div class="col-md-6 col-lg-4">';
+      let header = '<h3>' + type.type + '</h3>'; //  <a href="#"><i class="bi bi-question-circle"></i></a>
       //output += '<div>' + type.description + "</div>";
       type.ranges.forEach((range) => {
         if(dayrange == range.name) {
@@ -145,8 +159,9 @@ console.log(dayrange);
             //let fulltime = dayjs(time);
             //let rend = dayjs(range.end);
             //let timeleft = dayjs(fn).to(rend);
-            output += '<div class="alert alert-success">';
+            output += '<div class="alert alert-success text-center">';
             output += header;
+            output += timerange;
             output += '<div><i class="bi bi-patch-check-fill fs-2"></i></div>';
             output += '<div>You may make noise.</div>';
             output += '</div>';
@@ -154,6 +169,7 @@ console.log(dayrange);
           } else if(status == 'alert-danger') {
             output += '<div class="alert alert-danger text-center">';
             output += header;
+            output += timerange;
             output += '<div><i class="bi bi-exclamation-octagon-fill fs-2"></i></div>';
             output += '<div>Please, wait for another time.</div>';
             output += '</div>';
