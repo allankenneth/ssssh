@@ -1,7 +1,7 @@
 <!doctype HTML>
 <html lang="en">
 <head>
-<title>Victoria BC Quiet District Bylaws Made Plain</title>
+<title>Ssssh! Victoria BC Quiet District Bylaws Made Plain</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -26,24 +26,32 @@
 <div class="row justify-content-md-center">
 <h2 class="text-center">Victoria BC Quiet District Bylaws Made Plain</h2>
 <div class="col-12" id="app"></div>
+<div style="height: 200px"></div>
+<div class="col-md-8">
+        <h1>About</h1>
+        <p>This site is not affiliated with the City of Victoria, British Columbia in any way and is
+        not guaranteed to be accurate. The logic is based on a reading of the bylaws and a customized
+        JSON representation derived from them. You can 
+        <a href="https://github.com/allankenneth/ssssh">view the code on GitHub</a>
+        .</p>
+        <p>Ssssh! was created in the spirit that more people would follow the bylaws and be respectful
+        of their neighbors if they had an easy way to check the bylaws that didn't involve reading a 
+        20 page PDF and attempting to parse out the bits relevant to them in the context of the 
+        current date and time that they are checking.</p>
+        
+        <a class="btn btn-primary mb-6" href="https://www.victoria.ca/assets/City~Hall/Bylaws/bylaw-03-012.pdf">Download Bylaw PDF</a>
 </div>
 </div>
+</div>
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+<script src="https://unpkg.com/dayjs@1.8.21/plugin/relativeTime.js"></script>v
+<script>dayjs.extend(window.dayjs_plugin_relativeTime)</script>
 <script>
-
-const now = new Date();
-
-const year = now.getFullYear();
-const month = now.getMonth();
-const day = now.getDay();
-let hours = now.getHours();
-const hour = hours <= 9 ? '0' + hours : hours;
-const minute = now.getMinutes();
-
-var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
-const today = now.toLocaleDateString('en-CA', options); //year + '-' + month + '-' + day;
-const time = hour + ':' + minute;
-
-//console.log(time);
+const today = dayjs().format('YYYY-MM-DD');
+const loadedon = dayjs().format('dddd MMM D [at] h:mm');
+const day = dayjs().format('d');
+const hour = dayjs().format('HH');
+const time = dayjs().format('HH:mm')
 
 /**
 * Holidays
@@ -102,19 +110,27 @@ if(day == 1 || day == 2 || day == 3 || day == 4 || day == 5) {
     headers: { Accept: 'application/json' },
   });
   const json = await res.json();
-  var output = '<div class="mt-3 mb-4 text-center">Page loaded on ' + today + '</div>';
+  var output = '<div class="mt-3 mb-4 text-center">Page loaded on ' + loadedon + '</div>';
   output += '<div class="row">';
   Object.entries(json).forEach(([key, zone]) => {
     zone[0].types.forEach((type) => {
       output += '<div class="col-md-4">';
       output += '<h3>' + type.type + "</h3>";
+      //output += '<div>' + type.description + "</div>";
       type.ranges.forEach((range) => {
         if(dayrange == range.name) {
-          //output += "--" + range.name + "<br>";
           output += '<div>' + range.start + ' - ';
           output += '' + range.end + '</div>';
           if(time > range.start && time < range.end) {
-            status = '<div class="alert alert-success">Yes, you may.</div>';
+            let fn = today + 'T' + time;
+            let fullnow = dayjs(fn);
+            let fulltime = dayjs(time);
+            let rend = dayjs(range.end);
+            //let timeleft = dayjs(fn).to(rend);
+            let timeleft = dayjs(fulltime).to(rend);
+            
+            status = '<div class="alert alert-success">Yes, you may for another ' + timeleft + '.</div>';
+            
           } else {
             status = '<div class="alert alert-danger">Please wait for another time.</div>';
           }
