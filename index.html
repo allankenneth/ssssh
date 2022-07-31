@@ -1,7 +1,7 @@
 <!doctype HTML>
 <html lang="en">
 <head>
-<title>Ssssh! Victoria BC Quiet District Bylaws Made Plain</title>
+<title>Ssssh! Victoria BC Quiet District Noise Bylaws Made Plain</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -45,6 +45,9 @@
   <a class="btn btn-lg btn-primary mb-6" href="https://www.victoria.ca/assets/City~Hall/Bylaws/bylaw-03-012-map.pdf" target="_blank" rel="nofollow">
     View the Noise District Map
   </a>
+  <a class="btn btn-lg btn-primary mb-6" href="https://www.victoria.ca/EN/main/city/bylaw-enforcement/report-a-bylaw-violation.html" target="_blank" rel="nofollow">
+    Report a Violation
+  </a>
 </div>
 <div style="height: 120px"></div>
 </div>
@@ -56,7 +59,7 @@
 <div class="col-md-8">
 <div class="py-5">
         <h1>About</h1>
-        <p>This site is not affiliated with the City of Victoria, British Columbia in any way and is
+        <p>Ssssh! is not affiliated with the City of Victoria, British Columbia in any way and is
         not guaranteed to be accurate. The display is based on a reading of the bylaws and a custom
         data representation derived from that. You can 
         <a style="color: #FFF;" href="https://github.com/allankenneth/ssssh">view the code on GitHub</a>
@@ -80,11 +83,13 @@
 </div>
 </div>
 </div>
-<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
-<script src="https://unpkg.com/dayjs@1.8.21/plugin/relativeTime.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=Promise"></script>
+<script src="https://unpkg.com/dayjs-with-plugins"></script>
+
+
 <script>
 
-dayjs.extend(window.dayjs_plugin_relativeTime);
+
 
 const today = dayjs().format('YYYY-MM-DD');
 const loadedon = dayjs().format('dddd[,] MMMM D [at] h:mm');
@@ -155,7 +160,6 @@ console.log(dayrange);
     zone[0].types.forEach((type) => {
       output += '<div class="col-md-6 col-lg-4">';
       let header = '<h3>' + type.type + '</h3>'; //  <a href="#"><i class="bi bi-question-circle"></i></a>
-      //output += '<div>' + type.description + "</div>";
       type.ranges.forEach((range) => {
         if(dayrange == range.name) {
           let timerange = '<div>' + range.start + ' - ';
@@ -167,25 +171,29 @@ console.log(dayrange);
           }
           
           if(status == 'alert-success') {
-            //let fn = today + 'T' + time;
-            //let fullnow = dayjs(fn);
-            //let fulltime = dayjs(time);
-            //let rend = dayjs(range.end);
-            //let timeleft = dayjs(fn).to(rend);
+            let fullnow = dayjs(today + 'T' + time);
+            let rend = dayjs(today+'T'+range.end);
+            let hoursleft = dayjs.duration(rend.diff(fullnow));
             output += '<div class="alert alert-success text-center">';
             output += header;
             output += timerange;
+            //output += '<div>' + type.description + "</div>";
             output += '<div><i class="bi bi-patch-check-fill fs-2"></i></div>';
-            output += '<div>You may make noise.</div>';
+            output += '<div><strong>' + hoursleft.format('H') + ' hours</strong> ';
+            output += 'and <strong>' + hoursleft.format('m') + ' minutes</strong></div>';
+            output += 'remaining for today.';
             output += '</div>';
             
           } else if(status == 'alert-danger') {
+            
             output += '<div class="alert alert-danger text-center">';
             output += header;
             output += timerange;
+            //output += '<div>' + type.description + "</div>";
             output += '<div><i class="bi bi-exclamation-octagon-fill fs-2"></i></div>';
             output += '<div>Please, wait for another time.</div>';
             output += '</div>';
+            
           }
         }
       });
