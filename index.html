@@ -83,15 +83,15 @@
 </div>
 </div>
 </div>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=Promise"></script>
 <script src="https://unpkg.com/dayjs-with-plugins"></script>
 
-
 <script>
 
-
-
 const today = dayjs().format('YYYY-MM-DD');
+const tomorrow = dayjs().add(1,'day');
 const loadedon = dayjs().format('dddd[,] MMMM D [at] h:mm');
 const day = dayjs().format('d');
 const hour = dayjs().format('HH');
@@ -137,14 +137,21 @@ const time = dayjs().format('HH:mm')
 //        ];
 
 let dayrange = '';
+let tomorrowrange = '';
 if(day == 1 || day == 2 || day == 3 || day == 4 || day == 5) {
-        dayrange = 'Weekdays';
+  dayrange = 'Weekdays';
+  if(day == 5) {
+    tomorrowrange = 'Saturday';
+  } else {
+    tomorrowrange = 'Weekdays';
+  }
 } else if (day == 6) {
-        dayrange = 'Saturday';
+  dayrange = 'Saturday';
+  tomorrowrange = 'Sunday';
 } else if (day == 0) {
-        dayrange = 'Holiday';
+  dayrange = 'Holiday';
 }
-console.log(dayrange);
+//console.log(dayrange);
 // elseif (in_array(let holidays,let today)) {
 // dayrange = 'Holiday';
 // }
@@ -154,44 +161,53 @@ console.log(dayrange);
     headers: { Accept: 'application/json' },
   });
   const json = await res.json();
+  var count = 0;
   var output = '<div class="mb-4 text-center text-uppercase fs-3">It is ' + loadedon + '</div>';
   output += '<div class="row">';
   Object.entries(json).forEach(([key, zone]) => {
     zone[0].types.forEach((type) => {
+      count++;
       output += '<div class="col-md-6 col-lg-4">';
-      let header = '<h3>' + type.type + '</h3>'; //  <a href="#"><i class="bi bi-question-circle"></i></a>
+      let header = '<h3>' + type.type + ' ';
+      header += '<a href="#desc' + count + '" data-bs-toggle="collapse" href="#desc' + count + '" role="button" aria-expanded="false" aria-controls="#desc' + count + '" class="alert-link">';
+      header += '<i class="bi bi-question-circle fs-5 inline-block ml-2 p-1"></i></a>';
+      header += '</h3>'; //  <a href="#"><i class="bi bi-question-circle"></i></a>
       type.ranges.forEach((range) => {
         if(dayrange == range.name) {
+          let status = 0;
           let timerange = '<div>' + range.start + ' - ';
           timerange += '' + range.end + '</div>';
           if(time > range.start && time < range.end) {
-            status = 'alert-success'; //'<div class="alert alert-success">Yes, you may make noise.</div>'; //  for another ' + timeleft + '
-          } else {
-            status = 'alert-danger'; //'<div class="alert alert-danger">Please wait for another time to make noise.</div>';
+            status = 1;
           }
-          
-          if(status == 'alert-success') {
-            let fullnow = dayjs(today + 'T' + time);
+          let fullnow = dayjs(today + 'T' + time);
+          if(status) {
+            
             let rend = dayjs(today+'T'+range.end);
             let hoursleft = dayjs.duration(rend.diff(fullnow));
             output += '<div class="alert alert-success text-center">';
             output += header;
             output += timerange;
-            //output += '<div>' + type.description + "</div>";
+            output += '<div id="desc' + count + '" class="collapse">' + type.description + "</div>";
             output += '<div><i class="bi bi-patch-check-fill fs-2"></i></div>';
             output += '<div><strong>' + hoursleft.format('H') + ' hours</strong> ';
             output += 'and <strong>' + hoursleft.format('m') + ' minutes</strong></div>';
             output += 'remaining for today.';
             output += '</div>';
             
-          } else if(status == 'alert-danger') {
+          } else {
+            
+            let rstart = dayjs(tomorrow.format('YYYY-MM-DD') + 'T' + range.start);
+            let hoursuntil = dayjs.duration(rstart.diff(fullnow));
             
             output += '<div class="alert alert-danger text-center">';
             output += header;
             output += timerange;
-            //output += '<div>' + type.description + "</div>";
+            output += '<div id="desc' + count + '" class="collapse">' + type.description + "</div>";
             output += '<div><i class="bi bi-exclamation-octagon-fill fs-2"></i></div>';
-            output += '<div>Please, wait for another time.</div>';
+            //output += '<div><strong>' + hoursuntil.format('H') + ' hours</strong> ';
+            //output += 'and <strong>' + hoursuntil.format('m') + ' minutes</strong></div>';
+            output += '<div>Please wait for another time.</div>';
             output += '</div>';
             
           }
