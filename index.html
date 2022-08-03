@@ -90,6 +90,7 @@
 
 <script>
 
+const year = dayjs().format('YYYY');
 const today = dayjs().format('YYYY-MM-DD');
 const tomorrow = dayjs().add(1,'day');
 const loadedon = dayjs().format('dddd[,] MMMM D [at] h:mm');
@@ -106,35 +107,38 @@ const time = dayjs().format('HH:mm')
 * (b) the day following a day that is named in paragraph (a) and that falls on a Sunday;
 *
 **/
-//let sssshday = '2022-07-06';
-//let newyearsday = year . '-01-01';
-//let easter = '2022-05-21'; // date("Y-m-d", easter_date(let year));
+let sssshday = '2022-08-02';
+let newyearsday = year + '-01-01';
+
+let longre = easterDateLLongre(year);
+let easter = longre[0] + '-' + longre[1] + '-' + longre[2];
+console.log(easter);
 //let gf = new DateTime(easter);
 //let goodf = gf->sub(new DateInterval('P3D'));
-//let goodfriday = goodf->format('Y-m-d');
-//let victoriaday = date('Y-m-d', strtotime("last monday before may 25 let year"));
-//let canadaday = year . '-07-01';
-//let bcday = date('Y-m-d', strtotime("first monday of august let year"));
-//let labourday = date('Y-m-d', strtotime("first monday of september let year"));
-//let thanksgiving = date('Y-m-d', strtotime("second monday of october let year"));
-//let rememberanceday = year . '-11-11';
-//let xmasday = year . '-12-25';
-//let boxingday = year . '-12-26';
-//let victoriaday = year . '-01-01'; // observed on the Monday before May 25th each year
-//let holidays = [
-//                sssshday,
-//                newyearsday,
-//                goodfriday,
-//                easter,
-//                victoriaday,
-//                canadaday,
-//                bcday,
-//                labourday,
-//                thanksgiving,
-//                rememberanceday,
-//                xmasday,
-//                boxingday
-//        ];
+let goodfriday = year + '-05-01'; //goodf->format('Y-m-d');
+//let victoriaday = year + '-05-02'; //date('Y-m-d', strtotime("last monday before may 25 let year"));
+let canadaday = year + '-07-01';
+let bcday = year + '-07-01'; //date('Y-m-d', strtotime("first monday of august let year"));
+let labourday = year + '-07-01'; //date('Y-m-d', strtotime("first monday of september let year"));
+let thanksgiving = year + '-07-01'; //date('Y-m-d', strtotime("second monday of october let year"));
+let rememberanceday = year + '-11-11';
+let xmasday = year + '-12-25';
+let boxingday = year + '-12-26';
+let victoriaday = year + '-01-01'; // observed on the Monday before May 25th each year
+let holidays = [
+               sssshday,
+               newyearsday,
+               goodfriday,
+               easter,
+               victoriaday,
+               canadaday,
+               bcday,
+               labourday,
+               thanksgiving,
+               rememberanceday,
+               xmasday,
+               boxingday
+       ];
 
 let dayrange = '';
 let tomorrowrange = '';
@@ -221,6 +225,17 @@ if(day == 1 || day == 2 || day == 3 || day == 4 || day == 5) {
   app.innerHTML = output;
   //console.log(output);
 })();
+// Below Easter algorithm is from 
+// https://stackoverflow.com/questions/1284314/easter-date-in-javascript
+function easterDateLLongre(Y) {
+  let M=3, G= Y % 19+1, C= ~~(Y/100)+1, L=~~((3*C)/4)-12,
+      E=(11*G+20+ ~~((8*C+5)/25)-5-L)%30, D;
+  E<0 && (E+=30);
+  (E==25 && G>11 || E==24) && E++;
+  (D=44-E)<21 && (D+=30);
+  (D+=7-(~~((5*Y)/4)-L-10+D)%7)>31 && (D-=31,M=4);
+  return [Y, M, D];
+}
 </script>
 </body>
 </html>
