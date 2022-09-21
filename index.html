@@ -21,11 +21,9 @@ setTimeout(function() { location.reload() }, 1000 * (60 - d.getSeconds()));
     <span class="display-4 fw-bold">Quiet District Noise Bylaws</span><br>
     <span class="display-5 text-uppercase">Made Plain</span>
 </h1>
-<div class="text-center">This app does not yet take into account holidays. <b>Coming Soon!</b></div>
 <div class="bg-white">
 <div class="container bg-white">
 <div class="row pt-3 pb-5">
-  
 
 <div class="col-12" id="app"></div>
 
@@ -104,12 +102,12 @@ const time = dayjs().format('HH:mm')
 * (b) the day following a day that is named in paragraph (a) and that falls on a Sunday;
 *
 **/
-let sssshday = '2022-08-02';
+let sssshday = '2022-09-20';
 let newyearsday = year + '-01-01';
 
 let longre = easterDateLLongre(year);
 let easter = longre[0] + '-' + longre[1] + '-' + longre[2];
-console.log(easter);
+//console.log(easter);
 //let gf = new DateTime(easter);
 //let goodf = gf->sub(new DateInterval('P3D'));
 let goodfriday = year + '-05-01'; //goodf->format('Y-m-d');
@@ -123,7 +121,6 @@ let xmasday = year + '-12-25';
 let boxingday = year + '-12-26';
 let victoriaday = year + '-01-01'; // observed on the Monday before May 25th each year
 let holidays = [
-               sssshday,
                newyearsday,
                goodfriday,
                easter,
@@ -139,23 +136,17 @@ let holidays = [
 
 let dayrange = '';
 let tomorrowrange = '';
-if(day == 1 || day == 2 || day == 3 || day == 4 || day == 5) {
+let holiday = false;
+if (holidays.includes(today) == true) {
+  dayrange = 'Holiday';
+  holiday = true;
+} else if (day == 1 || day == 2 || day == 3 || day == 4 || day == 5) {
   dayrange = 'Weekdays';
-  if(day == 5) {
-    tomorrowrange = 'Saturday';
-  } else {
-    tomorrowrange = 'Weekdays';
-  }
 } else if (day == 6) {
   dayrange = 'Saturday';
-  tomorrowrange = 'Sunday';
 } else if (day == 0) {
   dayrange = 'Holiday';
 }
-//console.log(dayrange);
-// elseif (in_array(let holidays,let today)) {
-// dayrange = 'Holiday';
-// }
 
 (async () => {
   const res = await fetch('https://raw.githubusercontent.com/allankenneth/ssssh/main/bylaws.json', {
@@ -163,7 +154,11 @@ if(day == 1 || day == 2 || day == 3 || day == 4 || day == 5) {
   });
   const json = await res.json();
   var count = 0;
-  var output = '<div class="mb-4 text-center text-uppercase fs-3">It is ' + loadedon + '</div>';
+  var output = '<div class="mb-3 text-center text-uppercase fs-3">It is ' + loadedon + '</div>';
+  if(holiday == true) {
+    output += '<div class="text-center fw-bold pb-3">IT\'S A HOLIDAY!</div>';
+  }
+  
   output += '<div class="row">';
   Object.entries(json).forEach(([key, zone]) => {
     zone[0].types.forEach((type) => {
