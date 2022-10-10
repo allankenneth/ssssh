@@ -101,25 +101,25 @@ const time = dayjs().format('HH:mm')
 * Christmas Day and December 26, and
 * (b) the day following a day that is named in paragraph (a) and that falls on a Sunday;
 *
+* Rather than attempt to jump through hoops automatically determining
+* the tricky dates here, we're just manually defining them annually.
+* Note that getting these dates in PHP was pretty easy (left in the comments)
+* but in javascript it's inexplicably hard. 
+*
 **/
 let sssshday = '2022-10-04';
 let newyearsday = year + '-01-01';
-
-let longre = easterDateLLongre(year);
-let easter = longre[0] + '-' + longre[1] + '-' + longre[2];
-//console.log(easter);
-//let gf = new DateTime(easter);
-//let goodf = gf->sub(new DateInterval('P3D'));
-let goodfriday = year + '-05-01'; //goodf->format('Y-m-d');
-//let victoriaday = year + '-05-02'; //date('Y-m-d', strtotime("last monday before may 25 let year"));
+let easter = '2023-04-09';
+let goodfriday = '2023-04-07';
+let victoriaday = '2023-05-22'; // observed on the Monday before May 25th each year
 let canadaday = year + '-07-01';
-let bcday = year + '-07-01'; //date('Y-m-d', strtotime("first monday of august let year"));
-let labourday = year + '-07-01'; //date('Y-m-d', strtotime("first monday of september let year"));
-let thanksgiving = year + '-07-01'; //date('Y-m-d', strtotime("second monday of october let year"));
+let bcday = '2023-08-01'; //date('Y-m-d', strtotime("first monday of august let year"));
+let labourday = '2023-09-04'; //date('Y-m-d', strtotime("first monday of september let year"));
+let thanksgiving = '2023-10-10'; //date('Y-m-d', strtotime("second monday of october let year"));
 let rememberanceday = year + '-11-11';
 let xmasday = year + '-12-25';
 let boxingday = year + '-12-26';
-let victoriaday = year + '-01-01'; // observed on the Monday before May 25th each year
+
 let holidays = [
                newyearsday,
                goodfriday,
@@ -167,7 +167,7 @@ if (holidays.includes(today) == true) {
       let header = '<h3>' + type.type + ' ';
       header += '<a href="#desc' + count + '" data-bs-toggle="collapse" href="#desc' + count + '" role="button" aria-expanded="false" aria-controls="#desc' + count + '" class="alert-link">';
       header += '<i class="bi bi-question-circle fs-5 inline-block ml-2 p-1"></i></a>';
-      header += '</h3>'; //  <a href="#"><i class="bi bi-question-circle"></i></a>
+      header += '</h3>';
       type.ranges.forEach((range) => {
         if(dayrange == range.name) {
           let status = 0;
@@ -215,19 +215,7 @@ if (holidays.includes(today) == true) {
   output += '</div>'; 
   let app = document.querySelector('#app');
   app.innerHTML = output;
-  //console.log(output);
 })();
-// Below Easter algorithm is from 
-// https://stackoverflow.com/questions/1284314/easter-date-in-javascript
-function easterDateLLongre(Y) {
-  let M=3, G= Y % 19+1, C= ~~(Y/100)+1, L=~~((3*C)/4)-12,
-      E=(11*G+20+ ~~((8*C+5)/25)-5-L)%30, D;
-  E<0 && (E+=30);
-  (E==25 && G>11 || E==24) && E++;
-  (D=44-E)<21 && (D+=30);
-  (D+=7-(~~((5*Y)/4)-L-10+D)%7)>31 && (D-=31,M=4);
-  return [Y, M, D];
-}
 </script>
 </body>
 </html>
