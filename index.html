@@ -9,11 +9,6 @@
 <meta http-equiv="Expires" content="0">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
-<script>
-// Refresh on the new minute
-// let d = new Date();
-// setTimeout(function() { location.reload() }, 1000 * (60 - d.getSeconds()));
-</script>
 </head>
 <body class="bg-light">
 <h1 class="text-center">
@@ -85,13 +80,18 @@
 
 <script>
 
-const year = dayjs().format('YYYY');
-const today = dayjs().format('YYYY-MM-DD');
-const tomorrow = dayjs().add(1,'day');
-const loadedon = dayjs().format('dddd[,] MMMM D [at] h:mm');
-const day = dayjs().format('d');
-const hour = dayjs().format('HH');
-const time = dayjs().format('HH:mm')
+loadLaws();
+  
+// Refresh on the new minute
+var date = new Date();
+setTimeout(function() {
+    setInterval(loadLaws, 60000);
+    loadLaws();
+}, (60 - date.getSeconds()) * 1000);
+
+
+
+function loadLaws () {
 
 /**
 * Holidays
@@ -107,20 +107,27 @@ const time = dayjs().format('HH:mm')
 * but in javascript it's inexplicably hard. 
 *
 **/
-let sssshday = '2022-10-04';
-let newyearsday = year + '-01-01';
-let easter = '2023-04-09';
-let goodfriday = '2023-04-07';
-let victoriaday = '2023-05-22'; // observed on the Monday before May 25th each year
-let canadaday = year + '-07-01';
-let bcday = '2023-08-01'; //date('Y-m-d', strtotime("first monday of august let year"));
-let labourday = '2023-09-04'; //date('Y-m-d', strtotime("first monday of september let year"));
-let thanksgiving = '2022-10-10'; //date('Y-m-d', strtotime("second monday of october let year"));
-let rememberanceday = year + '-11-11';
-let xmasday = year + '-12-25';
-let boxingday = year + '-12-26';
+let year = dayjs().format('YYYY');
+let today = dayjs().format('YYYY-MM-DD');
+let tomorrow = dayjs().add(1,'day');
+let loadedon = dayjs().format('dddd[,] MMMM D [at] h:mm');
+let day = dayjs().format('d');
+let hour = dayjs().format('HH');
+let time = dayjs().format('HH:mm');
+const sssshday = '2022-10-04';
+const newyearsday = year + '-01-01';
+const easter = '2023-04-09';
+const goodfriday = '2023-04-07';
+const victoriaday = '2023-05-22'; // observed on the Monday before May 25th each year
+const canadaday = year + '-07-01';
+const bcday = '2023-08-01'; //date('Y-m-d', strtotime("first monday of august let year"));
+const labourday = '2023-09-04'; //date('Y-m-d', strtotime("first monday of september let year"));
+const thanksgiving = '2022-10-10'; //date('Y-m-d', strtotime("second monday of october let year"));
+const rememberanceday = year + '-11-11';
+const xmasday = year + '-12-25';
+const boxingday = year + '-12-26';
 
-let holidays = [
+const holidays = [
                newyearsday,
                goodfriday,
                easter,
@@ -148,74 +155,81 @@ if (holidays.includes(today) == true) {
   dayrange = 'Holiday';
 }
 
-(async () => {
-  const res = await fetch('https://raw.githubusercontent.com/allankenneth/ssssh/main/bylaws.json', {
-    headers: { Accept: 'application/json' },
-  });
-  const json = await res.json();
-  var count = 0;
-  var output = '<div class="mb-3 text-center text-uppercase fs-3">It is ' + loadedon + '</div>';
-  if(holiday == true) {
-    output += '<div class="text-center fw-bold pb-3">IT\'S A HOLIDAY!</div>';
-  }
-  
-  output += '<div class="row">';
-  Object.entries(json).forEach(([key, zone]) => {
-    zone[0].types.forEach((type) => {
-      count++;
-      output += '<div class="col-md-6 col-lg-4">';
-      let header = '<h3>' + type.type + ' ';
-      header += '<a href="#desc' + count + '" data-bs-toggle="collapse" href="#desc' + count + '" role="button" aria-expanded="false" aria-controls="#desc' + count + '" class="alert-link">';
-      header += '<i class="bi bi-question-circle fs-5 inline-block ml-2 p-1"></i></a>';
-      header += '</h3>';
-      type.ranges.forEach((range) => {
-        if(dayrange == range.name) {
-          let status = 0;
-          let timerange = '<div>' + range.start + ' - ';
-          timerange += '' + range.end + '</div>';
-          if(time > range.start && time < range.end) {
-            status = 1;
-          }
-          let fullnow = dayjs(today + 'T' + time);
-          if(status) {
-            
-            let rend = dayjs(today+'T'+range.end);
-            let hoursleft = dayjs.duration(rend.diff(fullnow));
-            output += '<div class="alert alert-success text-center">';
-            output += header;
-            output += timerange;
-            output += '<div id="desc' + count + '" class="collapse">' + type.description + "</div>";
-            output += '<div><i class="bi bi-patch-check-fill fs-2"></i></div>';
-            output += '<div><strong>' + hoursleft.format('H') + ' hours</strong> ';
-            output += 'and <strong>' + hoursleft.format('m') + ' minutes</strong></div>';
-            output += 'remaining for today.';
-            output += '</div>';
-            
-          } else {
-            
-            let rstart = dayjs(tomorrow.format('YYYY-MM-DD') + 'T' + range.start);
-            let hoursuntil = dayjs.duration(rstart.diff(fullnow));
-            
-            output += '<div class="alert alert-danger text-center">';
-            output += header;
-            output += timerange;
-            output += '<div id="desc' + count + '" class="collapse">' + type.description + "</div>";
-            output += '<div><i class="bi bi-exclamation-octagon-fill fs-2"></i></div>';
-            //output += '<div><strong>' + hoursuntil.format('H') + ' hours</strong> ';
-            //output += 'and <strong>' + hoursuntil.format('m') + ' minutes</strong></div>';
-            output += '<div><strong>Please wait</strong><br> for another time.</div>';
-            output += '</div>';
-            
-          }
-        }
-      });
-      output += '</div>';
+  (async () => {
+    const res = await fetch('https://raw.githubusercontent.com/allankenneth/ssssh/main/bylaws.json', {
+      headers: { Accept: 'application/json' },
     });
-  });
-  output += '</div>'; 
-  let app = document.querySelector('#app');
-  app.innerHTML = output;
-})();
+
+    const json = await res.json();
+    let count = 0;
+    
+    var output = '<div class="mb-3 text-center text-uppercase fs-3">It is ' + loadedon + '</div>';
+    if(holiday == true) {
+      output += '<div class="text-center fw-bold pb-3">IT\'S A HOLIDAY!</div>';
+    }
+    
+    output += '<div class="row">';
+    Object.entries(json).forEach(([key, zone]) => {
+      zone[0].types.forEach((type) => {
+        count++;
+        output += '<div class="col-md-6 col-lg-4">';
+        let header = '<h3>' + type.type + ' ';
+        header += '<a href="#desc' + count + '" data-bs-toggle="collapse" href="#desc' + count + '" role="button" aria-expanded="false" aria-controls="#desc' + count + '" class="alert-link">';
+        header += '<i class="bi bi-question-circle fs-5 inline-block ml-2 p-1"></i></a>';
+        header += '</h3>';
+        type.ranges.forEach((range) => {
+          if(dayrange == range.name) {
+            let status = 0;
+            let timerange = '<div>' + range.start + ' - ';
+            timerange += '' + range.end + '</div>';
+            if(time > range.start && time < range.end) {
+              status = 1;
+            }
+            let fullnow = dayjs(today + 'T' + time);
+            if(status) {
+              
+              let rend = dayjs(today+'T'+range.end);
+              let hoursleft = dayjs.duration(rend.diff(fullnow));
+              output += '<div class="alert alert-success text-center">';
+              output += header;
+              output += timerange;
+              output += '<div id="desc' + count + '" class="collapse">' + type.description + "</div>";
+              output += '<div><i class="bi bi-patch-check-fill fs-2"></i></div>';
+              output += '<div><strong>' + hoursleft.format('H') + ' hours</strong> ';
+              output += 'and <strong>' + hoursleft.format('m') + ' minutes</strong></div>';
+              output += 'remaining for today.';
+              output += '</div>';
+              
+            } else {
+              
+              let rstart = dayjs(tomorrow.format('YYYY-MM-DD') + 'T' + range.start);
+              let hoursuntil = dayjs.duration(rstart.diff(fullnow));
+              
+              output += '<div class="alert alert-danger text-center">';
+              output += header;
+              output += timerange;
+              output += '<div id="desc' + count + '" class="collapse">' + type.description + "</div>";
+              output += '<div><i class="bi bi-exclamation-octagon-fill fs-2"></i></div>';
+              //output += '<div><strong>' + hoursuntil.format('H') + ' hours</strong> ';
+              //output += 'and <strong>' + hoursuntil.format('m') + ' minutes</strong></div>';
+              output += '<div><strong>Please wait</strong><br> for another time.</div>';
+              output += '</div>';
+              
+            }
+          }
+        });
+        output += '</div>';
+      });
+    });
+    output += '</div>'; 
+    let app = document.querySelector('#app');
+
+    app.innerHTML = output;
+    
+  })(); // end async await  
+} // end loadLaws()
+
 </script>
+
 </body>
 </html>
