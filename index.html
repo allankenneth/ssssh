@@ -13,8 +13,7 @@
 <body class="bg-light">
 <h1 class="text-center">
     <span class="fs-3">Victoria, BC</span><br>
-    <span class="display-4 fw-bold">Noise Bylaws</span><br>
-    <span class="display-5 text-uppercase">Made Plain</span>
+    <span class="display-4 fw-bold">Noise Bylaws</span>
 </h1>
 <div class="bg-white">
 <div class="container bg-white">
@@ -29,13 +28,13 @@
 <div class="container">
 <div class="row pt-3">
 <div class="col-12 text-center">
-  <a class="btn btn-lg btn-primary mb-6" href="https://www.victoria.ca/assets/City~Hall/Bylaws/bylaw-03-012.pdf" target="_blank" rel="nofollow">
+  <a class="btn btn-lg btn-success mb-6" href="https://www.victoria.ca/assets/City~Hall/Bylaws/bylaw-03-012.pdf" target="_blank" rel="nofollow">
     Read the Noise Bylaws
   </a>
   <a class="btn btn-lg btn-primary mb-6" href="https://www.victoria.ca/assets/City~Hall/Bylaws/bylaw-03-012-map.pdf" target="_blank" rel="nofollow">
     View the Noise District Map
   </a>
-  <a class="btn btn-lg btn-primary mb-6" href="https://www.victoria.ca/EN/main/city/bylaw-enforcement/report-a-bylaw-violation.html" target="_blank" rel="nofollow">
+  <a class="btn btn-lg btn-danger mb-6" href="https://www.victoria.ca/EN/main/city/bylaw-enforcement/report-a-bylaw-violation.html" target="_blank" rel="nofollow">
     Report a Violation
   </a>
 </div>
@@ -88,74 +87,75 @@ setTimeout(function() {
     setInterval(loadLaws, 60000);
     loadLaws();
 }, (60 - date.getSeconds()) * 1000);
-
+console.log(date);
 
 
 function loadLaws () {
 
-/**
-* Holidays
-*
-* (a) New Year’s Day, Good Friday, Easter Monday, Victoria Day, Canada Day,
-* British Columbia Day, Labour Day, Thanksgiving Day, Remembrance Day,
-* Christmas Day and December 26, and
-* (b) the day following a day that is named in paragraph (a) and that falls on a Sunday;
-*
-* Rather than attempt to jump through hoops automatically determining
-* the tricky dates here, we're just manually defining them annually.
-* Note that getting these dates in PHP was pretty easy (left in the comments)
-* but in javascript it's inexplicably hard. 
-*
-**/
-let year = dayjs().format('YYYY');
-let today = dayjs().format('YYYY-MM-DD');
-let tomorrow = dayjs().add(1,'day');
-let loadedon = dayjs().format('dddd[,] MMMM D [at] h:mm');
-let day = dayjs().format('d');
-let hour = dayjs().format('HH');
-let time = dayjs().format('HH:mm');
-const sssshday = '2022-10-04';
-const newyearsday = year + '-01-01';
-const familyday = '2023-02-20'; // 3rd Monday of February
-const easter = '2023-04-09';
-const goodfriday = '2023-04-07';
-const victoriaday = '2023-05-22'; // observed on the Monday before May 25th each year
-const canadaday = year + '-07-01';
-const bcday = '2023-08-01'; //date('Y-m-d', strtotime("first monday of august let year"));
-const labourday = '2023-09-04'; //date('Y-m-d', strtotime("first monday of september let year"));
-const thanksgiving = '2022-10-10'; //date('Y-m-d', strtotime("second monday of october let year"));
-const rememberanceday = year + '-11-11';
-const xmasday = year + '-12-25';
-const boxingday = year + '-12-26';
+  /**
+  * Holidays
+  *
+  * (a) New Year’s Day, Good Friday, Easter Monday, Victoria Day, Canada Day,
+  * British Columbia Day, Labour Day, Thanksgiving Day, Remembrance Day,
+  * Christmas Day and December 26, and
+  * (b) the day following a day that is named in paragraph (a) and that falls on a Sunday;
+  *
+  * Rather than attempt to jump through hoops automatically determining
+  * the tricky dates here, we're just manually defining them annually.
+  * Note that getting these dates in PHP was pretty easy but in javascript it's
+  * inexplicably hard. 
+  *
+  **/
+  let year = dayjs().format('YYYY');
+  let today = dayjs().format('YYYY-MM-DD');
+  let tomorrow = dayjs().add(1,'day');
+  let loadedon = dayjs().format('dddd[,] MMMM D [at] h:mm');
+  let day = dayjs().format('d');
+  let hour = dayjs().format('HH');
+  let time = dayjs().format('HH:mm');
+  const sssshday = '2023-03-03';
+  const newyearsday = year + '-01-01';
+  const familyday = '2023-02-20'; // 3rd Monday of February
+  const easter = '2023-04-09';
+  const goodfriday = '2023-04-07';
+  const victoriaday = '2023-05-22'; // observed on the Monday before May 25th each year
+  const canadaday = year + '-07-01';
+  const bcday = '2023-08-01'; //date('Y-m-d', strtotime("first monday of august let year"));
+  const labourday = '2023-09-04'; //date('Y-m-d', strtotime("first monday of september let year"));
+  const thanksgiving = '2022-10-10'; //date('Y-m-d', strtotime("second monday of october let year"));
+  const rememberanceday = year + '-11-11';
+  const xmasday = year + '-12-25';
+  const boxingday = year + '-12-26';
 
-const holidays = [
-               newyearsday,
-               familyday,
-               goodfriday,
-               easter,
-               victoriaday,
-               canadaday,
-               bcday,
-               labourday,
-               thanksgiving,
-               rememberanceday,
-               xmasday,
-               boxingday
-       ];
+  const holidays = [
+                //sssshday, // here for testing
+                newyearsday,
+                familyday,
+                goodfriday,
+                easter,
+                victoriaday,
+                canadaday,
+                bcday,
+                labourday,
+                thanksgiving,
+                rememberanceday,
+                xmasday,
+                boxingday
+        ];
 
-let dayrange = '';
-let tomorrowrange = '';
-let holiday = false;
-if (holidays.includes(today) == true) {
-  dayrange = 'Holiday';
-  holiday = true;
-} else if (day == 1 || day == 2 || day == 3 || day == 4 || day == 5) {
-  dayrange = 'Weekdays';
-} else if (day == 6) {
-  dayrange = 'Saturday';
-} else if (day == 0) {
-  dayrange = 'Holiday';
-}
+  let dayrange = '';
+  let tomorrowrange = '';
+  let holiday = false;
+  if (holidays.includes(today) == true) {
+    dayrange = 'Holiday';
+    holiday = true;
+  } else if (day == 1 || day == 2 || day == 3 || day == 4 || day == 5) {
+    dayrange = 'Weekdays';
+  } else if (day == 6) {
+    dayrange = 'Saturday';
+  } else if (day == 0) {
+    dayrange = 'Holiday';
+  }
 
   (async () => {
     const res = await fetch('https://raw.githubusercontent.com/allankenneth/ssssh/main/bylaws.json', {
